@@ -1,0 +1,11 @@
+name: fastapidemo
+
+channels:
+  - conda-forge
+dependencies:
+  - pandas=1.1.3
+  - numpy=1.18.1
+  - scikit-learn=0.23.0
+  - fastapi=0.61.1
+  - uvicorn=0.12.2
+prefix: /anaconda3/envs/fastapidemo

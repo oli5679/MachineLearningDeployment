@@ -1,0 +1,34 @@
+app: aws-python-rest-api
+service: aws-python-rest-api
+
+provider:
+  name: aws
+  region: eu-west-2
+  runtime: python3.7
+
+functions:
+  scorer:
+    handler: handler.score
+    events:
+      - http:
+          path: /score
+          method: post
+  status:
+    handler: handler.status
+    events:
+      - http:
+          path: /
+          method: get
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: 'linux'
+    zip: true  
+    slim: true
+  
+package:
+  exclude:
+    - 'node_modules/**'
