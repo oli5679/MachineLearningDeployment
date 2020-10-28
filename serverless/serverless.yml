@@ -13,22 +13,36 @@ functions:
       - http:
           path: /score
           method: post
+    layers:
+      - arn:aws:lambda:eu-west-2:770693421928:layer:Klayers-python38-pandas:17
+      - arn:aws:lambda:eu-west-2:770693421928:layer:Klayers-python38-numpy:10
+            
   status:
     handler: handler.status
     events:
       - http:
           path: /
           method: get
+    layers:
+      - arn:aws:lambda:eu-west-2:770693421928:layer:Klayers-python38-pandas:17
+      - arn:aws:lambda:eu-west-2:770693421928:layer:Klayers-python38-numpy:10
+          
 
 plugins:
   - serverless-python-requirements
 
+  
 custom:
   pythonRequirements:
-    dockerizePip: 'linux'
-    zip: true  
+    dockerizePip: 'non-linux'
     slim: true
+    noDeploy:
+      - six
+      - threadpoolctl
+      - jmespath
+      - joblib
+      - dateutil
+      - numpy
   
-package:
-  exclude:
-    - 'node_modules/**'
+
+

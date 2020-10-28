@@ -6,13 +6,19 @@ Work in progress
 
 ## prerequestites
 
-Conda - https://docs.conda.io/projects/conda/en/latest/user-guide/install/
-
 Docker - https://docs.docker.com/docker-for-mac/install/
 
 AWS - https://aws.amazon.com/
 
 AWS cli - https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html
+
+## run outside of Docker
+
+    conda env create -n fastapidemo -f environment.yml
+    conda activate fastapidemo
+    uvicorn main:app --host 0.0.0.0 --port 80
+
+go to http://0.0.0.0:80/docs for API docs and chance to test locally
 
 
 ## rebuild and run docker image locally
@@ -21,9 +27,6 @@ build a livescoring API as docker image (flask+nginx+conda)
 
     docker build -t fastapidemo .
     docker run  -p 80:80 fastapidemo
-
-go to http://0.0.0.0/docs for API docs and chance to test locally
-
 
 ## push to ECR
 
@@ -37,9 +40,9 @@ setup AWS cli, look up account id and then run the following commands
 
 [replace with actual account id]
 
-    docker tag fastapi-demo:latest [1234].dkr.ecr.eu-west-2.amazonaws.com/fastapi-demo
+    docker tag fastapi-demo:latest [account_id].dkr.ecr.eu-west-2.amazonaws.com/fastapi-demo
 
-    docker push [1234].dkr.ecr.eu-west-2.amazonaws.com/flask-ecs-demo
+    docker push [account_id].dkr.ecr.eu-west-2.amazonaws.com/flask-ecs-demo
 
 TODO - investigate proper CI/CD pipeline
 

@@ -1,12 +1,7 @@
 import pandas as pd
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
-import numpy as np
+import joblib
 import json
 from copy import copy 
-import pickle
-import datetime
 
 class Scorer():
     def __init__(self, model_features: list, artefact_path: str):
@@ -15,7 +10,7 @@ class Scorer():
         artefact_path: path to model binary
         '''
         self.model_features = model_features
-        self.model =  pickle.load(open(artefact_path,'rb'))
+        self.model =  joblib.load(artefact_path)
         
     def create_response(self, input_data: list) -> dict:
         '''

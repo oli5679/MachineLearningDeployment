@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "app_function": "server.app",
+        "profile_name": "personal",
+        "project_name": "zappa",
+        "runtime": "python3.7",
+        "s3_bucket": "zappa-xcfmrisob",
+        "slim_handler": true
+    }
+}

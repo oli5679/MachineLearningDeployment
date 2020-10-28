@@ -4,8 +4,9 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 import numpy as np
-import pickle
+import joblib
 import sklearn2pmml
+import pickle
 
 '''
 Fitting binary classifier to predict survival of titanic passangers. Using:
@@ -45,6 +46,8 @@ def main():
     # Save artefacts
     data['prediction'] = gbdt_pipeline.predict_proba(X)[:,1]
     pickle.dump(gbdt_pipeline,open(f'{ARTEFACT_PATH}.pkl','wb'))
+    joblib.dump(gbdt_pipeline, f'{ARTEFACT_PATH}.sav')
+    
     sklearn2pmml.sklearn2pmml(sklearn2pmml.make_pmml_pipeline(gbdt_pipeline), f"{ARTEFACT_PATH}.pmml", with_repr = True)
     data.to_csv(f'{ARTEFACT_PATH}_test_cases.csv',index=False)
     
