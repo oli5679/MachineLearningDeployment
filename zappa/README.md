@@ -6,7 +6,7 @@ https://github.com/Miserlou/Zappa
 
 Based on this guide https://towardsdatascience.com/how-to-deploy-a-machine-learning-model-on-aws-lambda-24c36dcaed20
 
-## Prerequesites
+## Prerequisites
 
 AWS account
 
