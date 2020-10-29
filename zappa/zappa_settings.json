@@ -5,6 +5,7 @@
         "project_name": "zappa",
         "runtime": "python3.7",
         "s3_bucket": "zappa-xcfmrisob",
-        "slim_handler": true
+        "slim_handler": true,
+        "api_key_required": true
     }
 }

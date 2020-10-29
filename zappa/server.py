@@ -27,8 +27,8 @@ class Scorer():
         Args:
             input_dict: dictionary, with input model features as list of dictionaries in key 'input'
             
-        Retruns:
-            output_dict: dictioanry, with scored inputs as list of dictionaries in key 'output'
+        Returns:
+            output_dict: dictionary, with scored inputs as list of dictionaries in key 'output'
             
         '''
         output_df = pd.DataFrame(input_data)
@@ -49,8 +49,13 @@ def healthcheck():
     return flask.json.dumps(data)
 
 @app.route('/', methods=['POST'])
-def index():
-    payload = json.loads(flask.request.get_data().decode('utf-8'))
-    print(payload)
-    response = SCORER.create_response(payload['input'])
-    return json.dumps(response)
+def create_score():
+    try:
+        payload = json.loads(flask.request.get_data().decode('utf-8'))
+        response = SCORER.create_response(payload['input'])
+        return json.dumps(response)
+    except Exception as e:
+        {
+        "statusCode": 200,
+        "body": str(e)
+        }
