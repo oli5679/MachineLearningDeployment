@@ -2,11 +2,21 @@
 <PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.4">
 	<Header>
 		<Application name="JPMML-SkLearn" version="1.6.7"/>
-		<Timestamp>2020-10-28T17:58:50Z</Timestamp>
+		<Timestamp>2020-10-28T20:54:12Z</Timestamp>
 	</Header>
 	<MiningBuildTask>
-		<Extension>PMMLPipeline(steps=[('imputer', SimpleImputer()),
-       ('gbdt_clf', GradientBoostingClassifier())])</Extension>
+		<Extension>PMMLPipeline(steps=[('imputer', SimpleImputer(add_indicator=False, copy=True, fill_value=None,
+              missing_values=nan, strategy='mean', verbose=0)),
+       ('gbdt_clf', GradientBoostingClassifier(ccp_alpha=0.0, criterion='friedman_mse', init=None,
+                           learning_rate=0.1, loss='deviance', max_depth=3,
+                           max_features=None, max_leaf_nodes=None,
+                           min_impurity_decrease=0.0, min_impurity_split=None,
+                           min_samples_leaf=1, min_samples_split=2,
+                           min_weight_fraction_leaf=0.0, n_estimators=100,
+                           n_iter_no_change=None, presort='deprecated',
+                           random_state=None, subsample=1.0, tol=0.0001,
+                           validation_fraction=0.1, verbose=0,
+                           warm_start=False))])</Extension>
 	</MiningBuildTask>
 	<DataDictionary>
 		<DataField name="y" optype="categorical" dataType="integer">
@@ -441,9 +451,6 @@
 											<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="13.0"/>
 										</Node>
 									</Node>
-									<Node score="2.830539275150756">
-										<SimplePredicate field="double(float(x4))" operator="lessOrEqual" value="0.5"/>
-									</Node>
 								</Node>
 							</TreeModel>
 						</Segment>
@@ -695,7 +702,6 @@
 									<MiningField name="double(float(x1))"/>
 									<MiningField name="double(float(x5))"/>
 									<MiningField name="double(float(x3))"/>
-									<MiningField name="double(float(x2))"/>
 									<MiningField name="double(float(x4))"/>
 								</MiningSchema>
 								<Node score="1.920911787646164">
@@ -717,9 +723,6 @@
 										<Node score="-0.20435532094083303">
 											<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="152.5062484741211"/>
 										</Node>
-									</Node>
-									<Node score="1.920911787646164">
-										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="35.5"/>
 									</Node>
 								</Node>
 							</TreeModel>
@@ -1069,8 +1072,9 @@
 									<MiningField name="double(float(x5))"/>
 									<MiningField name="double(float(x3))"/>
 									<MiningField name="double(float(x2))"/>
+									<MiningField name="double(float(x4))"/>
 								</MiningSchema>
-								<Node score="1.4452934606577579">
+								<Node score="-0.8112333855872584">
 									<True/>
 									<Node score="-2.604580680911609">
 										<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="10.481249809265137"/>
@@ -1090,8 +1094,8 @@
 											<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="8.5"/>
 										</Node>
 									</Node>
-									<Node score="-0.8112333855872584">
-										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="29.84955883026123"/>
+									<Node score="1.4452934606577579">
+										<SimplePredicate field="double(float(x4))" operator="lessOrEqual" value="0.5"/>
 									</Node>
 								</Node>
 							</TreeModel>
@@ -1271,7 +1275,6 @@
 							<TreeModel functionName="regression" missingValueStrategy="nullPrediction" noTrueChildStrategy="returnLastPrediction">
 								<MiningSchema>
 									<MiningField name="double(float(x5))"/>
-									<MiningField name="double(float(x3))"/>
 									<MiningField name="double(float(x2))"/>
 									<MiningField name="double(float(x4))"/>
 								</MiningSchema>
@@ -1292,7 +1295,7 @@
 									<Node score="2.198503226183946">
 										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="38.5"/>
 										<Node score="-1.721367232224652">
-											<SimplePredicate field="double(float(x3))" operator="lessOrEqual" value="0.5"/>
+											<SimplePredicate field="double(float(x4))" operator="lessOrEqual" value="4.5"/>
 										</Node>
 									</Node>
 									<Node score="-1.320190139054462">
@@ -1330,7 +1333,7 @@
 										</Node>
 									</Node>
 									<Node score="-1.2727748876032632">
-										<SimplePredicate field="double(float(x3))" operator="lessOrEqual" value="6.5"/>
+										<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="58.22500228881836"/>
 									</Node>
 								</Node>
 							</TreeModel>
@@ -1556,7 +1559,7 @@
 									<Node score="2.02454094180961">
 										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="38.5"/>
 										<Node score="-1.517639319861408">
-											<SimplePredicate field="double(float(x3))" operator="lessOrEqual" value="0.5"/>
+											<SimplePredicate field="double(float(x4))" operator="lessOrEqual" value="4.5"/>
 										</Node>
 									</Node>
 									<Node score="-1.2080137004297657">
@@ -1662,7 +1665,7 @@
 									<Node score="1.8187928607534682">
 										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="38.5"/>
 										<Node score="-1.4419392497278165">
-											<SimplePredicate field="double(float(x3))" operator="lessOrEqual" value="0.5"/>
+											<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="33.5"/>
 										</Node>
 									</Node>
 									<Node score="-1.1884024439684264">
@@ -1724,7 +1727,7 @@
 										</Node>
 									</Node>
 									<Node score="-1.2364061637924595">
-										<SimplePredicate field="double(float(x3))" operator="lessOrEqual" value="6.5"/>
+										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="22.84955883026123"/>
 									</Node>
 								</Node>
 							</TreeModel>
@@ -1830,6 +1833,7 @@
 							<True/>
 							<TreeModel functionName="regression" missingValueStrategy="nullPrediction" noTrueChildStrategy="returnLastPrediction">
 								<MiningSchema>
+									<MiningField name="double(float(x1))"/>
 									<MiningField name="double(float(x5))"/>
 									<MiningField name="double(float(x2))"/>
 								</MiningSchema>
@@ -1847,10 +1851,10 @@
 											<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="35.25"/>
 										</Node>
 									</Node>
-									<Node score="1.0522584706791231">
+									<Node score="1.8274379428963152">
 										<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="52.82709884643555"/>
-										<Node score="1.8274379428963152">
-											<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="44.5"/>
+										<Node score="1.0522584706791231">
+											<SimplePredicate field="double(float(x1))" operator="lessOrEqual" value="0.5"/>
 										</Node>
 									</Node>
 									<Node score="-1.8702687266309967">
@@ -2185,7 +2189,7 @@
 											</Node>
 										</Node>
 										<Node score="-1.074742699836709">
-											<SimplePredicate field="double(float(x3))" operator="lessOrEqual" value="4.5"/>
+											<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="43.29375076293945"/>
 										</Node>
 									</Node>
 									<Node score="-2.790916963110549">
@@ -2204,6 +2208,7 @@
 							<True/>
 							<TreeModel functionName="regression" missingValueStrategy="nullPrediction" noTrueChildStrategy="returnLastPrediction">
 								<MiningSchema>
+									<MiningField name="double(float(x1))"/>
 									<MiningField name="double(float(x5))"/>
 									<MiningField name="double(float(x2))"/>
 								</MiningSchema>
@@ -2221,10 +2226,10 @@
 											<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="35.25"/>
 										</Node>
 									</Node>
-									<Node score="1.0494928607182348">
+									<Node score="1.693181483789297">
 										<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="52.82709884643555"/>
-										<Node score="1.693181483789297">
-											<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="44.5"/>
+										<Node score="1.0494928607182348">
+											<SimplePredicate field="double(float(x1))" operator="lessOrEqual" value="0.5"/>
 										</Node>
 									</Node>
 									<Node score="-1.1201809547108976">
@@ -2396,7 +2401,6 @@
 							<True/>
 							<TreeModel functionName="regression" missingValueStrategy="nullPrediction" noTrueChildStrategy="returnLastPrediction">
 								<MiningSchema>
-									<MiningField name="double(float(x1))"/>
 									<MiningField name="double(float(x5))"/>
 									<MiningField name="double(float(x2))"/>
 									<MiningField name="double(float(x4))"/>
@@ -2418,7 +2422,7 @@
 									<Node score="-1.1961774205875668">
 										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="20.0"/>
 										<Node score="1.1189916181681117">
-											<SimplePredicate field="double(float(x1))" operator="lessOrEqual" value="0.5"/>
+											<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="262.6875"/>
 										</Node>
 									</Node>
 									<Node score="1.2727659148975403">
@@ -2559,8 +2563,8 @@
 							<True/>
 							<TreeModel functionName="regression" missingValueStrategy="nullPrediction" noTrueChildStrategy="returnLastPrediction">
 								<MiningSchema>
-									<MiningField name="double(float(x1))"/>
 									<MiningField name="double(float(x5))"/>
+									<MiningField name="double(float(x3))"/>
 									<MiningField name="double(float(x2))"/>
 									<MiningField name="double(float(x4))"/>
 								</MiningSchema>
@@ -2581,11 +2585,11 @@
 									<Node score="-1.1625225278219282">
 										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="20.0"/>
 										<Node score="1.1077764437960815">
-											<SimplePredicate field="double(float(x1))" operator="lessOrEqual" value="0.5"/>
+											<SimplePredicate field="double(float(x3))" operator="lessOrEqual" value="2.5"/>
 										</Node>
 									</Node>
 									<Node score="1.2444338067216103">
-										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="50.0"/>
+										<SimplePredicate field="double(float(x4))" operator="lessOrEqual" value="3.0"/>
 									</Node>
 								</Node>
 							</TreeModel>
@@ -2752,9 +2756,7 @@
 							<TreeModel functionName="regression" missingValueStrategy="nullPrediction" noTrueChildStrategy="returnLastPrediction">
 								<MiningSchema>
 									<MiningField name="double(float(x5))"/>
-									<MiningField name="double(float(x3))"/>
 									<MiningField name="double(float(x2))"/>
-									<MiningField name="double(float(x4))"/>
 								</MiningSchema>
 								<Node score="-1.0430424555445033">
 									<True/>
@@ -2773,11 +2775,11 @@
 									<Node score="-1.1368586414912345">
 										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="20.0"/>
 										<Node score="1.1003481219111044">
-											<SimplePredicate field="double(float(x3))" operator="lessOrEqual" value="2.5"/>
+											<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="262.6875"/>
 										</Node>
 									</Node>
 									<Node score="1.2209532549825635">
-										<SimplePredicate field="double(float(x4))" operator="lessOrEqual" value="3.0"/>
+										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="50.0"/>
 									</Node>
 								</Node>
 							</TreeModel>
@@ -2870,7 +2872,7 @@
 											</Node>
 										</Node>
 										<Node score="-1.0428801600563917">
-											<SimplePredicate field="double(float(x3))" operator="lessOrEqual" value="4.5"/>
+											<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="43.29375076293945"/>
 										</Node>
 									</Node>
 									<Node score="-0.6674489264146964">
@@ -3049,7 +3051,7 @@
 										</Node>
 									</Node>
 									<Node score="-1.172031795594143">
-										<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="58.22500228881836"/>
+										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="22.84955883026123"/>
 									</Node>
 								</Node>
 							</TreeModel>
@@ -3190,6 +3192,7 @@
 							<True/>
 							<TreeModel functionName="regression" missingValueStrategy="nullPrediction" noTrueChildStrategy="returnLastPrediction">
 								<MiningSchema>
+									<MiningField name="double(float(x1))"/>
 									<MiningField name="double(float(x5))"/>
 									<MiningField name="double(float(x3))"/>
 									<MiningField name="double(float(x2))"/>
@@ -3212,7 +3215,7 @@
 									<Node score="-1.117380584918053">
 										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="20.0"/>
 										<Node score="1.086839413985428">
-											<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="18.5"/>
+											<SimplePredicate field="double(float(x1))" operator="lessOrEqual" value="0.5"/>
 										</Node>
 									</Node>
 									<Node score="0.9312075682577239">
@@ -3262,6 +3265,7 @@
 									<MiningField name="double(float(x5))"/>
 									<MiningField name="double(float(x3))"/>
 									<MiningField name="double(float(x2))"/>
+									<MiningField name="double(float(x4))"/>
 								</MiningSchema>
 								<Node score="-0.013199869805815192">
 									<True/>
@@ -3274,7 +3278,7 @@
 											</Node>
 										</Node>
 										<Node score="-1.0369768811234472">
-											<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="43.29375076293945"/>
+											<SimplePredicate field="double(float(x4))" operator="lessOrEqual" value="1.5"/>
 										</Node>
 									</Node>
 									<Node score="-0.607900683011977">
@@ -3365,7 +3369,7 @@
 									<MiningField name="double(float(x2))"/>
 									<MiningField name="double(float(x4))"/>
 								</MiningSchema>
-								<Node score="1.1721904007266497">
+								<Node score="1.555458379972486">
 									<True/>
 									<Node score="0.11005395039951682">
 										<SimplePredicate field="double(float(x3))" operator="lessOrEqual" value="1.5"/>
@@ -3385,8 +3389,8 @@
 											<SimplePredicate field="double(float(x4))" operator="lessOrEqual" value="2.5"/>
 										</Node>
 									</Node>
-									<Node score="1.555458379972486">
-										<SimplePredicate field="double(float(x2))" operator="lessOrEqual" value="51.5"/>
+									<Node score="1.1721904007266497">
+										<SimplePredicate field="double(float(x5))" operator="lessOrEqual" value="92.56459617614746"/>
 									</Node>
 								</Node>
 							</TreeModel>

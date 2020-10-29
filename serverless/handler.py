@@ -1,19 +1,20 @@
 import pandas as pd
 import joblib
 import json
-from copy import copy 
+from copy import copy
 
-class Scorer():
+
+class Scorer:
     def __init__(self, model_features: list, artefact_path: str):
-        '''
+        """
         model_features: features used in model
         artefact_path: path to model binary
-        '''
+        """
         self.model_features = model_features
-        self.model =  joblib.load(artefact_path)
-        
+        self.model = joblib.load(artefact_path)
+
     def create_response(self, input_data: list) -> dict:
-        '''
+        """
         Batch response API:
         
         Args:
@@ -22,35 +23,33 @@ class Scorer():
         Retruns:
             output_dict: dictioanry, with scored inputs as list of dictionaries in key 'output'
             
-        '''
+        """
         output_df = pd.DataFrame(input_data)
-        output_df['prediction'] = self.model.predict_proba(output_df[self.model_features])[:,1]
-        output_df['prediction_time'] = datetime.datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-        return output_df.to_dict(orient='records')
+        output_df["prediction"] = self.model.predict_proba(
+            output_df[self.model_features]
+        )[:, 1]
+        output_df["prediction_time"] = datetime.datetime.now().strftime(
+            "%m/%d/%Y %H:%M:%S"
+        )
+        return output_df.to_dict(orient="records")
 
-SCORER = Scorer(model_features= ['Male', 'Age', 'SibSp',
-        'Parch', 'Fare',], artefact_path='bin/titanic_clf.pkl')
+
+SCORER = Scorer(
+    model_features=["Male", "Age", "SibSp", "Parch", "Fare",],
+    artefact_path="bin/titanic_clf.pkl",
+)
 
 
-TEST_INPUT = [{'Male':0, 'Age':21, 'SibSp':0,
-        'Parch':0, 'Fare':21.5,}]
+TEST_INPUT = [{"Male": 0, "Age": 21, "SibSp": 0, "Parch": 0, "Fare": 21.5,}]
+
 
 def score(event, context):
     try:
-        score_response = SCORER.create_response(event['input'])
-        return {
-            "statusCode": 200,
-            "body": json.dumps(score_response)
-        }
+        score_response = SCORER.create_response(event["input"])
+        return {"statusCode": 200, "body": json.dumps(score_response)}
     except Exception as e:
-        return {
-            "statusCode": 400,
-            "body": str(e)
-        }
+        return {"statusCode": 400, "body": str(e)}
 
 
 def status(event, context):
-    return {
-        "statusCode": 200,
-        "body": "status OK!"
-    }
+    return {"statusCode": 200, "body": "status OK!"}
