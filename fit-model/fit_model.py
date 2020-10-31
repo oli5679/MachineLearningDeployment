@@ -59,18 +59,12 @@ def main():
     # Save artefacts
     data["prediction"] = gbdt_pipeline.predict_proba(X)[:, 1]
     pickle.dump(gbdt_pipeline, open(f"{ARTEFACT_PATH}.pkl", "wb"))
-    joblib.dump(gbdt_pipeline, f"{ARTEFACT_PATH}.sav")
-
     sklearn2pmml.sklearn2pmml(
         sklearn2pmml.make_pmml_pipeline(gbdt_pipeline),
         f"{ARTEFACT_PATH}.pmml",
         with_repr=True,
     )
     initial_type = [("float_input", FloatTensorType([None, 4]))]
-    onx = convert_sklearn(gbdt_pipeline, initial_types=initial_type)
-    with open(f"{ARTEFACT_PATH}.onnx", "wb") as f:
-        f.write(onx.SerializeToString())
-
     data.to_csv(f"{ARTEFACT_PATH}_test_cases.csv", index=False)
 
 

@@ -8,27 +8,23 @@ import datetime
 
 app = flask.Flask(__name__)
 
-MODEL_LOCAL_PATH = "bin/titanic_clf.pkl"
-
-
 class Scorer:
     def __init__(self, model_features: list, artefact_path: str):
         """
-        model_features: features used in model
-        artefact_path: path to model binary
+        Args:
+            model_features: features used in model
+            artefact_path: path to model binary
         """
         self.model_features = model_features
         self.model = pickle.load(open(artefact_path, "rb"))
 
-    def create_response(self, input_data: list) -> dict:
+    def create_response(self, input_data: list) -> list:
         """
-        Batch response API:
-        
-        Args:
-            input_dict: dictionary, with input model features as list of dictionaries in key 'input'
+        Args:        
+            input_data: list, with input model features as list of dictionaries in key 'input'
             
         Returns:
-            output_dict: dictionary, with scored inputs as list of dictionaries in key 'output'
+            output_data: list, with scored inputs as list of dictionaries in key 'output'
             
         """
         output_df = pd.DataFrame(input_data)
@@ -46,7 +42,6 @@ SCORER = Scorer(
     artefact_path="bin/titanic_clf.pkl",
 )
 
-
 @app.route("/", methods=["GET"])
 def healthcheck():
     return flask.json.dumps("status OK!")
@@ -57,6 +52,7 @@ def create_score():
     try:
         payload = json.loads(flask.request.get_data().decode("utf-8"))
         response = SCORER.create_response(payload["input"])
+        print('hello')
         return json.dumps(response)
     except Exception as e:
         return flask.abort(404, description=str(e))

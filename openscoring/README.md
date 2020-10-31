@@ -1,49 +1,22 @@
-# Openscoring
+## Openscoring demo
 
-Tool for inference from machine learning models compiled as 'PMML' artefacts.
+Creates rest API for machine learning model(s) specified as PMML documents
 
-## Dependencies
+API details https://github.com/openscoring/openscoring
 
-Get binaries from here https://github.com/openscoring/openscoring
+### Setup
 
-    brew cask install java
+Install and run docker https://www.docker.com/
 
-## Start openscoring server
+Export model as PMML https://cran.r-project.org/web/packages/pmml/index.html
 
-    java -jar bin/openscoring-server-executable-2.0.2.jar
+add PMML to src directory (for now using Thor model), and change setup.sh command to reference PMML and desired model name
 
-## Build and run docker image
+### Deploy
 
-    sudo docker run --net="host" jpmml/openscoring:latest
+    # only need to do this if code has changed
+    docker build -t openscoring_demo .
 
+    # make sure nothing else is running on port 1234, or change port in docker run command, and Dockerfile expose
+    docker run -p 1234:8080 openscoring_demo
 
-
-## Upload model
-
-    java -cp bin/openscoring-client-executable-2.0.2.jar org.openscoring.client.Deployer --model http://localhost:8080/openscoring/model/Titanic --file bin/titanic_clf.pmml
-
-## Endpoints
-
-    - HTTP method	Endpoint	Required role(s)	Description
-    - GET	/model	-	Get the summaries of all models
-    - PUT	/model/${id}	admin	Deploy a model
-    - GET	/model/${id}	-	Get the summary of a model
-    - GET	/model/${id}/pmml	admin	Download a model as a PMML document
-    - POST	/model/${id}	-	Evaluate data in "single prediction" mode
-    - POST	/model/${id}/batch	-	Evaluate data in "batch prediction" mode
-    - POST	/model/${id}/csv	-	Evaluate data in "CSV prediction" mode
-    - DELETE	/model/${id}	admin	Undeploy a model
-
-## Test endpoint
-
-    curl --location --request POST 'http://localhost:8080/openscoring/model/Titanic' \
-    --header 'Content-Type: application/json' \
-    --data-raw '{
-        "id" : "record-001",
-        "arguments" : {
-            "x1" : 5.1,
-            "x2" : 3.5,
-            "x3" : 1.4,
-            "x4" : 0.2
-        }
-    }'

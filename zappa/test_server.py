@@ -25,7 +25,7 @@ def test_404_if_empty_post(client):
     assert response.status_code == 404
 
 
-def test_correct_response(client):
+def test_create_score(client):
     """
     Check correct response for input
     """
