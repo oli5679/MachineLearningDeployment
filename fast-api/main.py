@@ -14,8 +14,9 @@ import fastapi
 import pydantic
 
 
+# Todo use type hinting with custom class to validate model inputs
 class ScoreRequest(pydantic.BaseModel):
-    input_data: list
+    input: list
     request_id: Optional[str] = None
 
 
@@ -28,15 +29,15 @@ class Scorer:
         self.model_features = model_features
         self.model = pickle.load(open(artefact_path, "rb"))
 
-    def create_response(self, input_data: list) -> dict:
+    def create_response(self, input_data: list) -> list:
         """
         Batch response API:
         
         Args:
-            input_dict: dictionary, with input model features as list of dictionaries in key 'input'
+            input_dict: list, with input model features as list of dictionaries in key 'input'
             
         Retruns:
-            output_dict: dictioanry, with scored inputs as list of dictionaries in key 'output'
+            output_dict: list, with scored inputs as list of dictionaries in key 'output'
             
         """
         output_df = pd.DataFrame(input_data)
@@ -64,4 +65,4 @@ def index():
 
 @app.post("/score/")
 def create_score(score_request: ScoreRequest):
-    return SCORER.create_response(score_request.input_data)
+    return SCORER.create_response(score_request.input)

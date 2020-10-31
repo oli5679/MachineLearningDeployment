@@ -8,6 +8,7 @@ import datetime
 
 app = flask.Flask(__name__)
 
+
 class Scorer:
     def __init__(self, model_features: list, artefact_path: str):
         """
@@ -42,6 +43,7 @@ SCORER = Scorer(
     artefact_path="bin/titanic_clf.pkl",
 )
 
+
 @app.route("/", methods=["GET"])
 def healthcheck():
     return flask.json.dumps("status OK!")
@@ -52,7 +54,7 @@ def create_score():
     try:
         payload = json.loads(flask.request.get_data().decode("utf-8"))
         response = SCORER.create_response(payload["input"])
-        print('hello')
+        print("hello")
         return json.dumps(response)
     except Exception as e:
         return flask.abort(404, description=str(e))
