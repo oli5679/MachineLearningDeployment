@@ -7,16 +7,24 @@ import json
 from copy import copy
 import pickle
 import datetime
-from typing import Optional
+from typing import Optional, List
 
 
 import fastapi
 import pydantic
 
 
+class ModelEntry(pydantic.BaseModel):
+    Male: int
+    Age: float
+    SibSp: int
+    Parch: int
+    Fare: float
+
+
 # Todo use type hinting with custom class to validate model inputs
 class ScoreRequest(pydantic.BaseModel):
-    input: list
+    input: List[ModelEntry]
     request_id: Optional[str] = None
 
 
@@ -40,7 +48,8 @@ class Scorer:
             output_dict: list, with scored inputs as list of dictionaries in key 'output'
             
         """
-        output_df = pd.DataFrame(input_data)
+        input_data_clean = [dict(x) for x in input_data]
+        output_df = pd.DataFrame(input_data_clean)
         output_df["prediction"] = self.model.predict_proba(
             output_df[self.model_features]
         )[:, 1]
