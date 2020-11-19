@@ -52,4 +52,4 @@ TODO - investigate proper CI/CD pipeline
 
 ## deploy app on ECS
 
-TODO add details
+See details here (fargate). https://aws.amazon.com/premiumsupport/knowledge-center/ecs-tasks-pull-images-ecr-repository/
